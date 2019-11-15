@@ -11,7 +11,7 @@ An opinionated Resilio setup using Ansible.
 
 ### Ansible
 
-Copy `/ansible/group_vars/all/vars.yml.example` as `/ansible/group_vars/all/vars.yml` to configure ansible.
+Copy `/ansible/group_vars/all/vars.yml.example` as `/ansible/group_vars/all/vars.yml` to configure ansible.  
 Copy `/ansible/inventory.example` as `/ansible/inventory` to configure host inventory, both IPs and DNS entries may be used.
 
 The `root_password` and `user_password` should be the password part of a .htaccess user. After the configuration the user `deploy` should be used.
@@ -46,6 +46,28 @@ After the first run, the playbook may be invoked normally, as the proper users a
 cd ansible
 ANSIBLE_CONFIG=ansible.cfg ansible-playbook -i inventory provision.yml
 ```
+
+## Adding Resilio shares
+
+To add shares, add the keys in the `vars.yml` file, and run the playbook to apply the configuration on the server.
+
+```yaml
+resilio_shares:
+  - group: default
+    shares:
+    - RESILIO_KEY_1
+    - RESILIO_KEY_2
+  - group: john_smith
+    shares:
+    - RESILIO_KEY_3
+    - RESILIO_KEY_4
+```
+
+The groups act as a directory seperator on the server, allowing to group the shares together on the disk, for easy cleanup or grouping them by person if multiple people share servers for increased availability and speed.
+
+The shares will be located on the server under `/home/rslsync/Resilio Sync/${group}/${share-key}`.
+
+It is recommended to only use encrypted keys on the servers, so cheap VPS providers can be used for large storage capacities, treating the servers as untrusted with personal data.
 
 ## Inspirations
 

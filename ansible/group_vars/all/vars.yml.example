@@ -9,7 +9,9 @@ ssh_public_keys:
 
 # Resilio
 resilio_shares: 
-  - default:
+  - group: default
+    shares:
     - RESILIO_KEY
-  - john_doe:
+  - group: john_smith
+    shares:
     - RESILIO_KEY
