@@ -1,0 +1,5 @@
+---
+- name: Reload resilio-sync
+  service:
+    name: resilio-sync
+    state: restarted

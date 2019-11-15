@@ -6,3 +6,10 @@ user_password: HTPASSWD-HASHED-PASSWORD
 # SSH
 ssh_public_keys:
   - ~/.ssh/id_rsa.pub
+
+# Resilio
+resilio_shares: 
+  - default:
+    - RESILIO_KEY
+  - john_doe:
+    - RESILIO_KEY

@@ -10,3 +10,5 @@
       tags: harden-linux
     - role: ansible-role-fail2ban
       tags: fail2ban
+    - role: ansible-role-resilio
+      tags: resilio

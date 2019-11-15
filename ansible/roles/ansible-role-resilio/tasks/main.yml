@@ -1,0 +1,33 @@
+---
+- name: Add Resilio Key
+  apt_key:
+    url: https://linux-packages.resilio.com/resilio-sync/key.asc
+    state: present
+
+- name: Add Resilio Repository
+  apt_repository:
+    repo: 'deb http://linux-packages.resilio.com/resilio-sync/deb resilio-sync non-free'
+    state: present
+
+- name: Update APT package index
+  apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Install Resilio
+  apt:
+    state: present
+    pkg: 
+    - resilio-sync
+
+- name: Copy Resilio configuration file
+  template:
+    src: templates/etc/resilio-sync/config.json.j2
+    dest: "/etc/resilio-sync/config.json"
+  notify: "Reload resilio-sync"
+
+- name: Enable and start Resilio
+  service:
+    name: resilio-sync
+    enabled: yes
+    state: started
