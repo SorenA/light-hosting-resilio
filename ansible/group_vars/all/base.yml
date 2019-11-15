@@ -1,0 +1,7 @@
+---
+ansible_python_interpreter: /usr/bin/python3
+
+# Networking
+harden_sshguard_whitelist:
+  - "127.0.0.0/8"
+  - "::1/128"
